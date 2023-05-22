@@ -2,7 +2,7 @@
 My Purchase Tracker App
 """
 
-#import libraries
+# import libraries
 from PyQt5.QtWidgets import *
 from PyQt5.QtWidgets import (
     QGroupBox,
@@ -21,28 +21,22 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from pymongo import MongoClient
 import sys
+import sqlite3
 
-#end import libraries
+# end import libraries
 
-# open Mongodb database and collection
-try:
-	myclient = MongoClient("mongodb://localhost:27017/")
-	print("Connected successfully!")
-except:
-	print("Could not connect to MongoDB")
+# open sqlite3 database and collection
+# setup database connections
+my_conn = sqlite3.connect('purchase.db')
+print("Database opened successfully! Proceed further...")
+cursor_obj = my_conn.cursor()
 
-db = myclient['mydb']
-print("Database mydb assigned...")
 
-mycollection = db['purchase']
-print("Collection purchase assigned...")
 
-######## end try block
-
-#PyQT App declaration
+# PyQT App declaration
 application = QApplication([])
 mainWindow = QWidget()
-mainWindow.setGeometry(0,0,800,600)
+mainWindow.setGeometry(0, 0, 800, 600)
 mainWindow.setWindowTitle("Purchase Registry")
 formLayout = QFormLayout()
 
@@ -51,30 +45,60 @@ calendar = QCalendarWidget()
 # setting geometry to the calendar
 calendar.setGeometry(10, 10, 400, 250)
 purchaseDate = QLabel('Purchase Date')
-purchaseDateField = QDateEdit()
-#calendar.setSelectedDate(purchaseDateField)
+purchaseDateField = QDate.currentDate()
+purchaseDateStr = purchaseDateField.toString()
+
+# calendar.setSelectedDate(purchaseDateField)
 purchaseType = QLabel('Type of Purchase')
 purchaseTypeField = QLineEdit()
+purchaseTypeStr = str(purchaseTypeField.text())
+print(purchaseTypeStr)
 purchasedFor = QLabel("Purchased For")
 purchasedForField = QLineEdit()
+purchasedForStr = str(purchasedForField.text())
+print(purchasedForStr)
 source = QLabel('Source of Purchase')
 sourceField = QLineEdit()
+sourceStr = str(sourceField.text())
+print(sourceStr)
 addInfo = QLabel('Additional Information')
-addInfoField = QPlainTextEdit()
-btns = QDialogButtonBox()
-btns.setStandardButtons(QDialogButtonBox.Cancel | QDialogButtonBox.Save)
+addInfoField = QLineEdit()
+addInfoStr = str(addInfoField.text())
+print(f"Type Purchase Type For: {type(purchaseTypeStr)}")
 
 ############### End UI Fields
 
-#Add fields in Form Layout
+#### Insert data in MongoDB
+def saveRecord():
+
+
+    mydata = (purchaseDateStr,purchaseTypeStr,purchasedForStr,sourceStr,addInfoStr)
+    my_query = "Insert into purchase values (?,?,?,?,?)"
+    cursor_obj.execute(my_query, mydata)
+    my_conn.commit()
+    print("Data committed to Database...")
+
+
+
+# Save Button
+saveButton = QPushButton("Save")
+saveButton.clicked.connect(saveRecord)
+
+
+
+
+
+# Add fields in Form Layout
 formLayout.addWidget(calendar)
-formLayout.addRow(purchaseDate, purchaseDateField)
+#formLayout.addRow(purchaseDate, purchaseDateField)
+#formLayout.addWidget(purchaseDateField)
 formLayout.addRow(purchaseType, purchaseTypeField)
 formLayout.addRow(purchasedFor, purchasedForField)
 formLayout.addRow(source, sourceField)
 formLayout.addRow(addInfo, addInfoField)
-formLayout.addWidget(btns)
+formLayout.addWidget(saveButton)
 
+#### Insert data in MongoDB
 
 
 
@@ -82,5 +106,7 @@ formLayout.addWidget(btns)
 
 mainWindow.setLayout(formLayout)
 mainWindow.show()
+#saveRecord()
 
 application.exec()
+my_conn.close()
