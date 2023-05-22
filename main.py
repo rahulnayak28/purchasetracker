@@ -52,32 +52,41 @@ purchaseDateStr = purchaseDateField.toString()
 # calendar.setSelectedDate(purchaseDateField)
 purchaseType = QLabel('Type of Purchase')
 purchaseTypeField = QLineEdit()
-purchaseTypeStr = purchaseTypeField.text()
-
 
 purchasedFor = QLabel("Purchased For")
 purchasedForField = QLineEdit()
 #purchasedForStr = str(purchasedForField.text())
-purchasedForStr = purchasedForField.text()
+
 
 source = QLabel('Source of Purchase')
 sourceField = QLineEdit()
 #sourceStr = str(sourceField.text())
-sourceStr = sourceField.text()
+
 
 addInfo = QLabel('Additional Information')
 addInfoField = QLineEdit()
 #addInfoStr = str(addInfoField.text())
-addInfoStr = addInfoField.text()
+
 
 
 ############### End UI Fields
 
 #### Insert data in MongoDB
 def saveRecord():
+    #mydata = (purchaseDateStr,purchaseTypeStr,purchasedForStr,sourceStr,addInfoStr)
+    purchaseTypeStr = purchaseTypeField.text()
+    purchasedForStr = purchasedForField.text()
+    sourceStr = sourceField.text()
+    addInfoStr = addInfoField.text()
 
+    mydata = []
 
-    mydata = (purchaseDateStr,purchaseTypeStr,purchasedForStr,sourceStr,addInfoStr)
+    mydata.append(purchaseDateStr)
+    mydata.append(purchaseTypeStr)
+    mydata.append(purchasedForStr)
+    mydata.append(sourceStr)
+    mydata.append(addInfoStr)
+
 
     ## For Debugging Purposes
     print(f"Type Purchase Type For: {type(purchaseTypeStr)}")
