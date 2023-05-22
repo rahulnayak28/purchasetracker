@@ -73,6 +73,13 @@ addInfoField = QLineEdit()
 
 #### Insert data in MongoDB
 def saveRecord():
+    """
+    This is the function where data is inserted into Sqlite 3 DB.
+    There is a need to fetch the text from QlineEdit elements and then converting into string format as Sqlite3 is not
+    compatible with QlineEdit Data types and other PyQT5 widgets. hence all the elements are required to be converted
+    first before inserting into the DB
+
+    """
     #mydata = (purchaseDateStr,purchaseTypeStr,purchasedForStr,sourceStr,addInfoStr)
     purchaseTypeStr = purchaseTypeField.text()
     purchasedForStr = purchasedForField.text()

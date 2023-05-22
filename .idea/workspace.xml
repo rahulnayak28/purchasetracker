@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2a63d418-a12c-4a61-8efe-57215442ee0c" name="Changes" comment="- Added enhancements">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="2a63d418-a12c-4a61-8efe-57215442ee0c" name="Changes" comment="- Corrected logic to remove empty string values in Qline Edit.">
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/purchase.db" beforeDir="false" afterPath="$PROJECT_DIR$/purchase.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +121,21 @@
       <option name="project" value="LOCAL" />
       <updated>1684764649645</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="- Corrected logic to remove empty string values in Qline Edit.">
+      <created>1684765141712</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1684765141712</updated>
+    </task>
+    <task id="LOCAL-00007" summary="- Corrected logic to remove empty string values in Qline Edit.">
+      <created>1684765263342</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1684765263342</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -132,6 +144,7 @@
     <MESSAGE value="- Added MongoDB connection&#10;- Added GUI Elements" />
     <MESSAGE value="- Added SqLite3 connection&#10;- Removed MongoDB Database&#10;- converted PyQt5 elements to string to compatibility with Sqlite3" />
     <MESSAGE value="- Added enhancements" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Added enhancements" />
+    <MESSAGE value="- Corrected logic to remove empty string values in Qline Edit." />
+    <option name="LAST_COMMIT_MESSAGE" value="- Corrected logic to remove empty string values in Qline Edit." />
   </component>
 </project>
