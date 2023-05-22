@@ -15,8 +15,9 @@ from PyQt5.QtWidgets import (
     QWidget,
     QApplication,
     QFormLayout,
+
 )
-from PyQt5 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from pymongo import MongoClient
@@ -51,20 +52,24 @@ purchaseDateStr = purchaseDateField.toString()
 # calendar.setSelectedDate(purchaseDateField)
 purchaseType = QLabel('Type of Purchase')
 purchaseTypeField = QLineEdit()
-purchaseTypeStr = str(purchaseTypeField.text())
-print(purchaseTypeStr)
+purchaseTypeStr = purchaseTypeField.text()
+
+
 purchasedFor = QLabel("Purchased For")
 purchasedForField = QLineEdit()
-purchasedForStr = str(purchasedForField.text())
-print(purchasedForStr)
+#purchasedForStr = str(purchasedForField.text())
+purchasedForStr = purchasedForField.text()
+
 source = QLabel('Source of Purchase')
 sourceField = QLineEdit()
-sourceStr = str(sourceField.text())
-print(sourceStr)
+#sourceStr = str(sourceField.text())
+sourceStr = sourceField.text()
+
 addInfo = QLabel('Additional Information')
 addInfoField = QLineEdit()
-addInfoStr = str(addInfoField.text())
-print(f"Type Purchase Type For: {type(purchaseTypeStr)}")
+#addInfoStr = str(addInfoField.text())
+addInfoStr = addInfoField.text()
+
 
 ############### End UI Fields
 
@@ -73,9 +78,18 @@ def saveRecord():
 
 
     mydata = (purchaseDateStr,purchaseTypeStr,purchasedForStr,sourceStr,addInfoStr)
+
+    ## For Debugging Purposes
+    print(f"Type Purchase Type For: {type(purchaseTypeStr)}")
+    print(f" value of the variable sourceStr is : {sourceStr} ")
+    print(f" value of the variable purchaseForStr is :  {purchasedForStr}")
+    print(f" value of the variable purchaseTypeStr is : {purchaseTypeStr} ")
+    ########## For Debugging Purposes
+
     my_query = "Insert into purchase values (?,?,?,?,?)"
     cursor_obj.execute(my_query, mydata)
     my_conn.commit()
+    QtWidgets.QMessageBox.critical(None, "Data Successfully Added!", QtWidgets.QMessageBox.Cancel)
     print("Data committed to Database...")
 
 
