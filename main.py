@@ -50,7 +50,7 @@ purchaseDateField = QDate.currentDate()
 purchaseDateStr = purchaseDateField.toString()
 
 # calendar.setSelectedDate(purchaseDateField)
-purchaseType = QLabel('Type of Purchase')
+purchaseType = QLabel('Item Purchased')
 purchaseTypeField = QLineEdit()
 
 purchasedFor = QLabel("Purchased For")
@@ -71,7 +71,8 @@ addInfoField = QLineEdit()
 
 ############### End UI Fields
 
-#### Insert data in MongoDB
+#### Insert data in SQlite 3 DB ################
+### Start of saveRecord Function ###########################
 def saveRecord():
     """
     This is the function where data is inserted into Sqlite 3 DB.
@@ -86,6 +87,7 @@ def saveRecord():
     sourceStr = sourceField.text()
     addInfoStr = addInfoField.text()
 
+# create empty list and append fields in the list
     mydata = []
 
     mydata.append(purchaseDateStr)
@@ -102,11 +104,40 @@ def saveRecord():
     print(f" value of the variable purchaseTypeStr is : {purchaseTypeStr} ")
     ########## For Debugging Purposes
 
-    my_query = "Insert into purchase values (?,?,?,?,?)"
-    cursor_obj.execute(my_query, mydata)
-    my_conn.commit()
-    QtWidgets.QMessageBox.critical(None, "Data Successfully Added!", QtWidgets.QMessageBox.Cancel)
-    print("Data committed to Database...")
+    try:
+        my_query = "Insert into purchase values (?,?,?,?,?)"
+        cursor_obj.execute(my_query, mydata)
+        my_conn.commit()
+    # For showing success message box
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Information)
+        msg.setText("Record Saved Successfully")
+        msg.setWindowTitle("Information")
+        msg.setStandardButtons(QMessageBox.Ok)
+        msg.exec()
+        ### End message box
+
+        print("Data committed to Database...")
+
+## To Clear screen data from fields once data is saved into the database
+        purchaseTypeField.setText("")
+        purchasedForField.setText("")
+        sourceField.setText("")
+        addInfoField.setText("")
+        print("Data Cleared from the screen...")
+
+    except sqlite3.OperationalError as error:
+        print(f"Record not inserted due to Sqlite3 Operational Error: {error}")
+    except sqlite3.NameError as error:
+        print(f"Record not inserted due to Sqlite3 Name Error : {error} ")
+    except sqlite3.ValueError as error:
+        print(f"Record not inserted due to Sqlite3 Value Error: {error}")
+    except sqlite3.InternalError as error:
+        print(f"Record not inserted due to Sqlite3 Internal Error: {error}")
+
+
+####### END OF SAVE RECORD FUNCTION ###########################################
+
 
 
 
@@ -128,7 +159,6 @@ formLayout.addRow(source, sourceField)
 formLayout.addRow(addInfo, addInfoField)
 formLayout.addWidget(saveButton)
 
-#### Insert data in MongoDB
 
 
 
