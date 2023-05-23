@@ -50,34 +50,52 @@ purchaseDateField = QDate.currentDate()
 purchaseDateStr = purchaseDateField.toString()
 
 # calendar.setSelectedDate(purchaseDateField)
-purchaseType = QLabel('Type of Purchase')
+purchaseType = QLabel('Item Purchased')
 purchaseTypeField = QLineEdit()
-purchaseTypeStr = purchaseTypeField.text()
-
 
 purchasedFor = QLabel("Purchased For")
 purchasedForField = QLineEdit()
 #purchasedForStr = str(purchasedForField.text())
-purchasedForStr = purchasedForField.text()
+
 
 source = QLabel('Source of Purchase')
 sourceField = QLineEdit()
 #sourceStr = str(sourceField.text())
-sourceStr = sourceField.text()
+
 
 addInfo = QLabel('Additional Information')
 addInfoField = QLineEdit()
 #addInfoStr = str(addInfoField.text())
-addInfoStr = addInfoField.text()
+
 
 
 ############### End UI Fields
 
-#### Insert data in MongoDB
+#### Insert data in SQlite 3 DB ################
+### Start of saveRecord Function ###########################
 def saveRecord():
+    """
+    This is the function where data is inserted into Sqlite 3 DB.
+    There is a need to fetch the text from QlineEdit elements and then converting into string format as Sqlite3 is not
+    compatible with QlineEdit Data types and other PyQT5 widgets. hence all the elements are required to be converted
+    first before inserting into the DB
 
+    """
+    #mydata = (purchaseDateStr,purchaseTypeStr,purchasedForStr,sourceStr,addInfoStr)
+    purchaseTypeStr = purchaseTypeField.text()
+    purchasedForStr = purchasedForField.text()
+    sourceStr = sourceField.text()
+    addInfoStr = addInfoField.text()
 
-    mydata = (purchaseDateStr,purchaseTypeStr,purchasedForStr,sourceStr,addInfoStr)
+# create empty list and append fields in the list
+    mydata = []
+
+    mydata.append(purchaseDateStr)
+    mydata.append(purchaseTypeStr)
+    mydata.append(purchasedForStr)
+    mydata.append(sourceStr)
+    mydata.append(addInfoStr)
+
 
     ## For Debugging Purposes
     print(f"Type Purchase Type For: {type(purchaseTypeStr)}")
@@ -86,11 +104,40 @@ def saveRecord():
     print(f" value of the variable purchaseTypeStr is : {purchaseTypeStr} ")
     ########## For Debugging Purposes
 
-    my_query = "Insert into purchase values (?,?,?,?,?)"
-    cursor_obj.execute(my_query, mydata)
-    my_conn.commit()
-    QtWidgets.QMessageBox.critical(None, "Data Successfully Added!", QtWidgets.QMessageBox.Cancel)
-    print("Data committed to Database...")
+    try:
+        my_query = "Insert into purchase values (?,?,?,?,?)"
+        cursor_obj.execute(my_query, mydata)
+        my_conn.commit()
+    # For showing success message box
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Information)
+        msg.setText("Record Saved Successfully")
+        msg.setWindowTitle("Information")
+        msg.setStandardButtons(QMessageBox.Ok)
+        msg.exec()
+        ### End message box
+
+        print("Data committed to Database...")
+
+## To Clear screen data from fields once data is saved into the database
+        purchaseTypeField.setText("")
+        purchasedForField.setText("")
+        sourceField.setText("")
+        addInfoField.setText("")
+        print("Data Cleared from the screen...")
+
+    except sqlite3.OperationalError as error:
+        print(f"Record not inserted due to Sqlite3 Operational Error: {error}")
+    except sqlite3.NameError as error:
+        print(f"Record not inserted due to Sqlite3 Name Error : {error} ")
+    except sqlite3.ValueError as error:
+        print(f"Record not inserted due to Sqlite3 Value Error: {error}")
+    except sqlite3.InternalError as error:
+        print(f"Record not inserted due to Sqlite3 Internal Error: {error}")
+
+
+####### END OF SAVE RECORD FUNCTION ###########################################
+
 
 
 
@@ -112,7 +159,6 @@ formLayout.addRow(source, sourceField)
 formLayout.addRow(addInfo, addInfoField)
 formLayout.addWidget(saveButton)
 
-#### Insert data in MongoDB
 
 
 
