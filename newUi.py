@@ -72,7 +72,7 @@ def saveRecord():
         print(f"Record not inserted due to Sqlite3 Name Error : {error} ")
 
     except sqlite3.ValueError as error:
-        print(f"Record not inserted due to Sqlite3 Value Error: {error}")
+        print(f" Failed...Record not inserted due to Sqlite3 Value Error: {error}")
 
     except sqlite3.InternalError as error:
         print(f"Record not inserted due to Sqlite3 Internal Error: {error}")

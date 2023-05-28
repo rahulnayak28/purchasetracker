@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2a63d418-a12c-4a61-8efe-57215442ee0c" name="Changes" comment="- Added Exception Handling in Database Insert&#10;- Added Message Box showing success message&#10;- Clearing Screen data post data insert into the database">
-      <change afterPath="$PROJECT_DIR$/newUi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_20_2023_8_12_PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_20_2023_8_12_PM__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/purchase.db" beforeDir="false" afterPath="$PROJECT_DIR$/purchase.db" afterDir="false" />
+    <list default="true" id="2a63d418-a12c-4a61-8efe-57215442ee0c" name="Changes" comment="- Added new newUi python file for refreshed UI Implementation using StreamLit">
+      <changelist_data name="Rahul Nayak" email="" />
+      <change beforePath="$PROJECT_DIR$/newUi.py" beforeDir="false" afterPath="$PROJECT_DIR$/newUi.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +21,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Rahul Nayak" />
+      </list>
+    </option>
     <option name="PUSH_TAGS">
       <GitPushTagMode>
         <option name="argument" value="--tags" />
@@ -36,6 +38,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="SIGN_OFF_COMMIT" value="true" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/main.py" root0="FORCE_HIGHLIGHTING" />
@@ -162,7 +165,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684838052605</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="- Added new newUi python file for refreshed UI Implementation using StreamLit">
+      <created>1685254070539</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1685254070540</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -173,6 +183,7 @@
     <MESSAGE value="- Added enhancements" />
     <MESSAGE value="- Corrected logic to remove empty string values in Qline Edit." />
     <MESSAGE value="- Added Exception Handling in Database Insert&#10;- Added Message Box showing success message&#10;- Clearing Screen data post data insert into the database" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Added Exception Handling in Database Insert&#10;- Added Message Box showing success message&#10;- Clearing Screen data post data insert into the database" />
+    <MESSAGE value="- Added new newUi python file for refreshed UI Implementation using StreamLit" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Added new newUi python file for refreshed UI Implementation using StreamLit" />
   </component>
 </project>
