@@ -11,55 +11,38 @@ my_conn = sqlite3.connect('purchase.db')
 print("Database opened successfully! Proceed further...")
 cursor_obj = my_conn.cursor()
 
+
+class Record:
+    def __init__(self, purchaseDate, purchaseItem, purchasedFor, source, sourceType, addInfo):
+        self.purchaseDate = purchaseDate
+        self.purchaseItem = purchaseItem
+        self.purchasedFor = purchasedFor
+        self.source = source
+        self.sourceType = sourceType
+        self.addInfo = addInfo
+
+
 # Give Title for the page
-st.title("My Purchase Register")
-
-# Define UI Fields
-purchaseDate = st.date_input("Enter Date of Purchase")
-st.write('Date of Purchase is : ', purchaseDate)
-purchaseItem = st.text_input("Enter Item purchased: ", max_chars= 150, autocomplete= "purchaseItem")
-purchasedFor = st.text_input("Enter Item is purchased for whom: ", max_chars= 150, autocomplete= "purchasedFor")
-source = st.text_input("Enter Source of Purchase: ", max_chars=150, autocomplete= "source")
-sourceType = st.multiselect('Select the type of source: ' , options= ['Online', 'Offline'], default=['Online'])
-addInfo = st.text_input("Enter any additional information:  ", max_chars= 500)
-saveButton = st.button('Save Record')
+st.set_page_config(page_title="Purchase Register", page_icon="🚀")
 
 
-############### End UI Fields
+# st.title("My Purchase Register")
 
 
-
-#### Insert data in SQlite 3 DB ################
-### Start of saveRecord Function ###########################
-
-def saveRecord():
+def saveRecord(a):
     """
     This is the function where data is inserted into Sqlite 3 DB.
-    There is a need to fetch the text from QlineEdit elements and then converting into string format as Sqlite3 is not
-    compatible with QlineEdit Data types and other PyQT5 widgets. hence all the elements are required to be converted
-    first before inserting into the DB
+
 
     """
-    # create empty list and append fields in the list
-    mydata = []
-    mydata.append(purchaseDate)
-    mydata.append(purchaseItem)
-    mydata.append(purchasedFor)
-    mydata.append(source)
-    mydata.append(sourceType)
-    mydata.append(addInfo)
-
-    ## For Debugging Purposes
-    print(f"Type Purchase Type For: {type(purchaseDate)}")
-    print(f" value of the variable source is : {source} ")
-    print(f" value of the variable purchaseFor is :  {purchasedFor}")
-    print(f" value of the variable purchaseType is : {purchaseItem} ")
-    ########## End For Debugging Purposes
 
     # For insert operation , creating a try except block
     try:
-        my_query = "Insert into purchase values (?,?,?,?,?,?)"
-        cursor_obj.execute(my_query, mydata)
+        cursor_obj.execute(
+            "Insert into purchase values (:purchaseDate,:purchaseItem,:purchasedFor,:source, :sourceType,:addInfo)",
+            {'purchaseDate': a.purchaseDate, 'purchaseType': a.purchaseItem, 'purchaseFor': a.purchasedFor,
+             'source': a.source, 'sourceType': a.sourceType, 'addInfo': a.addInfo})
+        # cursor_obj.execute(my_query, mydata)
         my_conn.commit()
         # For showing success message box
         st.success("{} Record inserted successfully".format(purchaseItem))
@@ -67,12 +50,6 @@ def saveRecord():
 
     except sqlite3.OperationalError as error:
         print(f"Record not inserted due to Sqlite3 Operational Error: {error}")
-
-    except sqlite3.NameError as error:
-        print(f"Record not inserted due to Sqlite3 Name Error : {error} ")
-
-    except sqlite3.ValueError as error:
-        print(f" Failed...Record not inserted due to Sqlite3 Value Error: {error}")
 
     except sqlite3.InternalError as error:
         print(f"Record not inserted due to Sqlite3 Internal Error: {error}")
@@ -82,9 +59,27 @@ def saveRecord():
     ####### END OF SAVE RECORD FUNCTION ###########################################
 
 
-    ### Call Save Record Function on Button Click
-    if saveButton:
-        print("Button Clicked. Calling SaveRecord Function Now")
-        saveRecord()
+# Define UI Fields
+purchaseDate = st.date_input("Enter Date of Purchase")
+st.write('Date of Purchase is : ', purchaseDate)
+purchaseItem = st.text_input("Enter Item purchased: ", max_chars=150, autocomplete="purchaseItem")
+purchasedFor = st.text_input("Enter Item is purchased for whom: ", max_chars=150, autocomplete="purchasedFor")
+source = st.text_input("Enter Source of Purchase: ", max_chars=150, autocomplete="source")
+sourceType = st.multiselect('Select the type of source: ', options=['Online', 'Offline'], default=['Online'])
+addInfo = st.text_input("Enter any additional information:  ", max_chars=500)
+saveButton = st.button(label='Save Record')
+### Call Save Record Function on Button Click
+if saveButton:
+    try:
+        # create empty list and append fields in the list
+        mydata = Record(purchaseDate,purchaseItem,purchasedFor,source,sourceType,addInfo)
+        saveRecord(mydata)
+        st.success(f"{purchaseItem} is saved to the database")
+    except Exception as e:
+        st.warning(f"Error in saving the record. please check & try again {e}")
+
+############### End UI Fields
 
 
+#### Insert data in SQlite 3 DB ################
+### Start of saveRecord Function ###########################
