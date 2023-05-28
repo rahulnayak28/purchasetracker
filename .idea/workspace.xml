@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2a63d418-a12c-4a61-8efe-57215442ee0c" name="Changes" comment="- Corrected logic to remove empty string values in Qline Edit.">
+    <list default="true" id="2a63d418-a12c-4a61-8efe-57215442ee0c" name="Changes" comment="- Added Exception Handling in Database Insert&#10;- Added Message Box showing success message&#10;- Clearing Screen data post data insert into the database">
+      <change afterPath="$PROJECT_DIR$/newUi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_20_2023_8_12_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_20_2023_8_12_PM__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/purchase.db" beforeDir="false" afterPath="$PROJECT_DIR$/purchase.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -22,6 +24,12 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="main" />
@@ -63,6 +71,9 @@
       <module name="purchasetracker" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="C:\Users\HP\PycharmProjects\purchasetracker\venv\Scripts\python.exe" />
       <option name="SDK_NAME" value="Python 3.10 (purchasetracker)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -144,7 +155,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684765576205</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="- Added Exception Handling in Database Insert&#10;- Added Message Box showing success message&#10;- Clearing Screen data post data insert into the database">
+      <created>1684838052604</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1684838052605</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -154,6 +172,7 @@
     <MESSAGE value="- Added SqLite3 connection&#10;- Removed MongoDB Database&#10;- converted PyQt5 elements to string to compatibility with Sqlite3" />
     <MESSAGE value="- Added enhancements" />
     <MESSAGE value="- Corrected logic to remove empty string values in Qline Edit." />
-    <option name="LAST_COMMIT_MESSAGE" value="- Corrected logic to remove empty string values in Qline Edit." />
+    <MESSAGE value="- Added Exception Handling in Database Insert&#10;- Added Message Box showing success message&#10;- Clearing Screen data post data insert into the database" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Added Exception Handling in Database Insert&#10;- Added Message Box showing success message&#10;- Clearing Screen data post data insert into the database" />
   </component>
 </project>
